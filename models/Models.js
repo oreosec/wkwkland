@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const PresenceSchema = new Schema({
     date: Date,
-    status: {
+    info: {
         type: String,
         enum: ["hadir", "izin", "sakit", "alpha"],
         default: "alpha",
@@ -44,9 +44,9 @@ const ModeratorSchema = new Schema({
 const MentorSchema = new Schema({
     username: String,
     role: { type: String, default: "mentor" },
-    presences: [PresenceSchema],
     moderator: { type: Schema.Types.ObjectId, ref: "Moderator" },
     disciples: [{ type: Schema.Types.ObjectId, ref: "Disciple" }],
+    presences: [PresenceSchema],
 });
 
 const DiscipleSchema = new Schema({

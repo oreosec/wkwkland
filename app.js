@@ -58,11 +58,13 @@ const authRouter = require("./routes/auth");
 const moderatorRouter = require("./routes/moderator");
 const mentorRouter = require("./routes/mentor");
 const discipleRouter = require("./routes/disciple");
+const presenceRouter = require("./routes/presence");
 const base = "/api/v1";
 
 app.use(base, authRouter);
 app.use(base, moderatorRouter);
 app.use(base, mentorRouter);
 app.use(base, discipleRouter);
+app.use(base, presenceRouter);
 
 module.exports = app;

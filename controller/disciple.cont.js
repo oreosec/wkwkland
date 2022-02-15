@@ -19,7 +19,7 @@ module.exports = {
         );
 
         res.status(201).json({
-            message: "Successfully create Santri",
+            message: "Berhasil membuat user santri",
             data: await Disciple.findOne({ name: req.body.name }),
         });
     },
@@ -36,7 +36,7 @@ module.exports = {
         );
 
         res.status(201).json({
-            message: "Successfully delete Santri",
+            message: "Berhasil menghapus user santri",
         });
     },
 };
