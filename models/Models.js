@@ -8,6 +8,7 @@ const PresenceSchema = new Schema({
         default: "alpha",
     },
     description: String,
+    morning: Boolean,
 });
 
 const ReportSchema = new Schema({

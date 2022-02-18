@@ -10,7 +10,7 @@ const {
 const sessionsValidate = require("../middlewares/sessions-validation.mw");
 
 router.put("/presence/add/:role", addPresence);
-    router.put("/presence/edit/:role", editPresence);
-router.post("/presence/list/", getPresenceDiscipleByDate);
+router.put("/presence/edit/:role", editPresence);
+router.get("/presence/list/:id", getPresenceDiscipleByDate);
 
 module.exports = router;
