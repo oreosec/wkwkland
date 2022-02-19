@@ -43,8 +43,11 @@ module.exports = {
 				.then((data) => {
 					// search by index by date
 					const absenIndex = data.presences.map((value, index) => {
-						// date e ijek error wae
-						if (value.date == date) {
+						let qFormated = new Date(date).toISOString();
+						let oFormated = new Date(value.date).toISOString();
+						qFormated = qFormated.split("T")[0];
+						oFormated = oFormated.split("T")[0];
+						if (qFormated == oFormated) {
 							return index
 						}
 					})[0]
