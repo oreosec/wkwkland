@@ -67,7 +67,6 @@ module.exports = {
 		let { id } = req.params;
 		let { date } = req.query;
 
-		// tanggale error wae raiso podo mboh nek ng fe pyw
 		if (id && date) {
 			await Mentor.findById(id)
 				.populate('disciples')
