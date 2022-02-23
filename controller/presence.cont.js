@@ -1,4 +1,5 @@
 const { Moderator, Mentor, Disciple } = require("../models/Models");
+const mongoose = require('mongoose');
 
 module.exports = {
 	addPresence: async (req, res) => {
@@ -6,16 +7,16 @@ module.exports = {
 		if (req.params.role == "mentor") db = Mentor;
 		else if (req.params.role == "disciple") db = Disciple;
 
-
-		let { id, date, info, description } = req.body;
-		if (id && date && info && description) {
+		let { id, date, info, description, morning } = req.body;
+		if (id && date && info && description && morning) {
 			db.findByIdAndUpdate(id,
 				{
 					$push: {
 						presences: {
 							date: date,
 							info: info,
-							description: description
+							description: description,
+							morning: morning,
 						}
 					}
 				}, (err, docs) => {
@@ -85,6 +86,17 @@ module.exports = {
 										id: value.id,
 										username: value.username,
 										presences: values
+									});
+								}else {
+									result.push({
+										id: value.id,
+										username: value.username,
+										presences: {
+											info: "",
+											_id: new mongoose.Types.ObjectId(),
+											date: oFormated,
+											description: ""
+										}
 									});
 								}
 							});
