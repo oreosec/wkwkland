@@ -5,8 +5,10 @@ const {
     deleteDisciple,
 } = require("../controller/disciple.cont");
 
-router.post("/disciple", createDisciple);
+const sessionsValidate = require("../middlewares/sessions-validation.mw");
 
-router.delete("/disciple", deleteDisciple);
+router.post("/disciple", sessionsValidate, createDisciple);
+
+router.delete("/disciple", sessionsValidate, deleteDisciple);
 
 module.exports = router;

@@ -57,7 +57,7 @@ module.exports = {
 		else if (req.params.role == "disciple") db = Disciple;
 
 		console.log(req.params.role);
-		let { id, date, info } = req.body;
+		let { id, date, info, morning } = req.body;
 		if (id && date && info) {
 			db.findOne({ _id: id })
 				.then((data) => {
@@ -67,17 +67,20 @@ module.exports = {
 						let oFormated = new Date(value.date).toISOString();
 						qFormated = qFormated.split("T")[0];
 						oFormated = oFormated.split("T")[0];
-						if (qFormated == oFormated) {
-							return index
+						if (qFormated == oFormated && value.morning == morning) {
+							return index;
 						}
 					})[0]
 
-					console.log(absenIndex)
+					if(absenIndex != undefined) {
+						data.presences[absenIndex].info = info;
+						if (req.body.description != undefined) data.presences[absenIndex].description = req.body.description;
+						data.save();
+						res.status(201).json({ message: "absensi berhasil dirubah." });
+					}else{
+						res.status(404).json({ message: "absensi tidak ditemukan." });
+					}
 
-					data.presences[absenIndex].info = info;
-					if (req.body.description != undefined) data.presences[absenIndex].description = req.body.description;
-					data.save()
-					res.status(201).json({ message: "absensi berhasil dirubah." });
 				})
 		}
 		else res.status(500).json({ message: "form tidak boleh kosong." });
@@ -110,15 +113,16 @@ module.exports = {
 								})
 							}
 							value.presences.forEach(values => {
-								qFormated = new Date(date).toISOString()
-								oFormated = new Date(values.date).toISOString()
-								qFormated = qFormated.split('T')[0]
-								oFormated = oFormated.split('T')[0]
+								let qFormated; let oFormated;
+								qFormated = new Date(date).toISOString();
+								oFormated = new Date(values.date).toISOString();
+								qFormated = qFormated.split('T')[0];
+								oFormated = oFormated.split('T')[0];
 
 								if(qFormated === oFormated){
 									result.forEach(rst => {
 										if(values.morning == rst.presences.morning) {
-											rst.presences = values
+											rst.presences = values;
 										}
 									})
 								}
@@ -126,7 +130,7 @@ module.exports = {
 							
 						})
 						
-					}res.json(result)
+					}res.json(result);
 					
 				})
 		} else res.status(500).json({ message: "form tidak boleh kosong" });

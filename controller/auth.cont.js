@@ -36,7 +36,6 @@ module.exports = {
         if (req.method === "GET") {
             return res.status(200).send(req.session.token);
         }
-
         const { username, password } = req.body;
 
         const currentUser = await User.findOne({ username });

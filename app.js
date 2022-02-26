@@ -5,12 +5,18 @@ const mongoSanitize = require("express-mongo-sanitize");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
+const csurf = require("csurf");
+const hpp = require('hpp');
 const logger = require("morgan");
 const cors = require("cors");
 const helmet = require("helmet");
-
 const app = express();
+
+app.use(cookieParser());
+app.use(csurf({cookie: {httpOnly: true,}}));
+app.use(hpp());
 
 // const corsOptions = {
 //     origin: "http://localhost:3000",
