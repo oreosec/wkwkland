@@ -1,10 +1,11 @@
 const router = require("express").Router();
+
 // controller
 const {
     addPresence,
     editPresence,
     getPresenceDiscipleByDate,
-} = require("../controller/presence.cont");
+} = require("../controller/v1/presence.cont");
 
 // middleware
 const sessionsValidate = require("../middlewares/sessions-validation.mw");

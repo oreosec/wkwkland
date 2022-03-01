@@ -1,4 +1,4 @@
-const { Moderator, Mentor, Disciple } = require("../models/Models");
+const { Moderator, Mentor, Disciple } = require("../../models/Models");
 const mongoose = require('mongoose');
 
 module.exports = {
@@ -6,9 +6,10 @@ module.exports = {
 		var db;
 		if (req.params.role == "mentor") db = Mentor;
 		else if (req.params.role == "disciple") db = Disciple;
+		else res.status(500).json({message: "data yang dimasukan tidak valid."})
 
 		let { id, date, info, description, morning } = req.body;
-		if (id && date && info && description && morning) {
+		if (id && date && info && description && morning && (role == "disciple" || role == "mentor")) {
 			let qFormated = new Date(date).toISOString();
 			qFormated = qFormated.split("T")[0];
 			var existed;
@@ -53,12 +54,13 @@ module.exports = {
 
 	editPresence: async (req, res) => {
 		var db;
-		if (req.params.role == "mentor") db = Mentor;
-		else if (req.params.role == "disciple") db = Disciple;
+		let { role } = req.params;
+		if (role == "mentor") db = Mentor;
+		else if (role == "disciple") db = Disciple;
+		else res.status(500).json({message: "data yang dimasukan tidak valid."})
 
-		console.log(req.params.role);
 		let { id, date, info, morning } = req.body;
-		if (id && date && info) {
+		if (id && date && info && (role == "disciple" || role == "mentor")) {
 			db.findOne({ _id: id })
 				.then((data) => {
 					// search by index by date
@@ -121,17 +123,18 @@ module.exports = {
 
 								if(qFormated === oFormated){
 									result.forEach(rst => {
-										if(values.morning == rst.presences.morning) {
-											rst.presences = values;
+										if(value.id == rst.id) {
+											if(values.morning == rst.presences.morning) {
+												rst.presences = values;
+											}
 										}
+										
 									})
 								}
 							})
 							
 						})
-						
 					}res.json(result);
-					
 				})
 		} else res.status(500).json({ message: "form tidak boleh kosong" });
 	},

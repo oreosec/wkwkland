@@ -3,7 +3,7 @@ const router = require("express").Router();
 const {
     getModerators,
     getSpecificModerator,
-} = require("../controller/moderator.cont");
+} = require("../controller/v1/moderator.cont");
 
 // middleware
 const sessionValidate = require("../middlewares/sessions-validation.mw");

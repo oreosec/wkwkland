@@ -5,7 +5,7 @@ const {
     getSpecificMentor,
     bindMentorAndModerator,
     patchMentorDisciples,
-} = require("../controller/mentor.cont");
+} = require("../controller/v1/mentor.cont");
 
 // middleware
 const sessionsValidate = require("../middlewares/sessions-validation.mw");

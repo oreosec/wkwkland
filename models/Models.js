@@ -39,7 +39,7 @@ const AdminSchema = new Schema({
 const ModeratorSchema = new Schema({
     username: String,
     role: { type: String, default: "moderator" },
-    mentors: [{ type: Schema.Types.ObjectId, ref: "Mentor" }],
+    disciples: [{ type: Schema.Types.ObjectId, ref: "Mentor" }],
 });
 
 const MentorSchema = new Schema({

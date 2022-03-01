@@ -1,4 +1,4 @@
-const { Mentor, Disciple } = require("../models/Models");
+const { Mentor, Disciple } = require("../../models/Models");
 
 module.exports = {
     createDisciple: async (req, res) => {

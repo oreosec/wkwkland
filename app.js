@@ -14,6 +14,7 @@ const cors = require("cors");
 const helmet = require("helmet");
 const app = express();
 
+app.disable('x-powered-by');
 app.use(cookieParser());
 app.use(csurf({cookie: {httpOnly: true,}}));
 app.use(hpp());

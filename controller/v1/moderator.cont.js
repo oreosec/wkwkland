@@ -1,4 +1,4 @@
-const { Moderator } = require("../models/Models");
+const { Moderator } = require("../../models/Models");
 
 module.exports = {
     getModerators: (req, res) => {

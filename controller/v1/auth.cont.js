@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const config = require("../config");
+const config = require("../../config");
 
 // models
-const { User } = require("../models/Models");
+const { User } = require("../../models/Models");
 
 const salt = 10;
 

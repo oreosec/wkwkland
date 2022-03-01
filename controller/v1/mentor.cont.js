@@ -1,4 +1,4 @@
-const { Moderator, Mentor } = require("../models/Models");
+const { Moderator, Mentor } = require("../../models/Models");
 
 module.exports = {
     getMentors: async (req, res) => {
